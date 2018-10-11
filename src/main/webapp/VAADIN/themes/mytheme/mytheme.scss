@@ -1,0 +1,173 @@
+// If you edit this file you need to compile the theme. See README.md for details.
+// Global variable overrides. Must be declared before importing Valo.
+// Defines the plaintext font size, weight and family. Font size affects general component sizing.
+//$v-font-size: 16px;
+//$v-font-weight: 300;
+//$v-font-family: "Open Sans", sans-serif;
+// Defines the border used by all components.
+//$v-border: 1px solid (v-shade 0.7);
+//$v-border-radius: 4px;
+// Affects the color of some component elements, e.g Button, Panel title, etc
+//$v-background-color: hsl(210, 0%, 98%);
+// Affects the color of content areas, e.g  Panel and Window content, TextField input etc
+//$v-app-background-color: $v-background-color;
+// Affects the visual appearance of all components
+//$v-gradient: v-linear 8%;
+//$v-bevel-depth: 30%;
+//$v-shadow-opacity: 5%;
+// Defines colors for indicating status (focus, success, failure)
+//$v-focus-color: valo-focus-color(); // Calculates a suitable color automatically
+//$v-friendly-color: #2c9720;
+//$v-error-indicator-color: #ed473b;
+// For more information, see: https://vaadin.com/book/-/page/themes.valo.html
+// Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
+//noinspection CssUnknownTarget
+@import "../valo/valo.scss";
+@import "buttons";
+@import "dashboard";
+@import "login";
+
+//noinspection SassScssResolvedByNameOnly
+@mixin mytheme {
+
+  @include valo;
+  .portal-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 100%;
+    height: 100vh;
+    background: #eeeeee;
+  }
+
+  .portal-menu-button {
+    float: right;
+  }
+
+  #portal-menu-wrapper {
+    display: block;
+    grid-column: 1;
+
+    .portal-menu {
+      width: 300px;
+      height: 100%;
+      border-right: 1px solid #444444;
+      transition: width 1s;
+
+      .menu-content {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 1s, opacity 1s linear;
+      }
+    }
+
+    .portal-menu.closed-menu {
+      width: 50px;
+
+      .menu-content {
+        visibility: hidden;
+        opacity: 0;
+        transition: none;
+      }
+    }
+  }
+
+  #portal-mobile-menu-wrapper {
+    display: none;
+  }
+
+  #portal-content-wrapper {
+    grid-column: 2;
+    overflow: auto;
+
+    .portal-content {
+      display: block;
+      height: 100%;
+
+      > .v-slot {
+        height: 100%;
+      }
+    }
+  }
+
+  div.search-bar {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    grid-gap: 10px;
+    padding: 0 !important;
+
+    .search-field {
+      grid-column: 1;
+    }
+
+    .search-button {
+      grid-column: 2;
+
+      > .v-button {
+        width: 100px;
+      }
+    }
+  }
+
+  .v-button:after {
+    content: none !important;
+  }
+
+  .template-layout {
+    display: block;
+    width: auto !important;
+    padding: 37px !important;
+  }
+
+  .css-block {
+    display: block !important;
+  }
+
+  .v-label.word-wrap {
+    white-space: normal;
+  }
+
+  .card-layout {
+    padding: 15px !important;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media all and (max-width: 900px) {
+  div.mytheme {
+    .portal-wrapper {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+
+      #portal-menu-wrapper {
+        display: none;
+      }
+
+      #portal-mobile-menu-wrapper {
+        display: block;
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: auto;
+
+        div.portal-mobile-menu {
+          width: 100%;
+          height: 100px;
+          border-bottom: 1px solid;
+          border-right: none;
+          transition: height 1s;
+        }
+
+        .portal-mobile-menu.closed-menu {
+          height: 38px;
+          width: 100%;
+        }
+      }
+
+      #portal-content-wrapper {
+        grid-column: 1;
+        grid-row: 2;
+      }
+    }
+  }
+}
